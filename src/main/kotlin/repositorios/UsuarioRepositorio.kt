@@ -18,13 +18,14 @@ class UsuarioRepositorio {
     }
 
     fun existe(nickname: String): Boolean {
-        //TODO: Completar
+
         for(elemento in usuarios){
             if(elemento.nickname.equals(nickname)) {
                 return true
             }
         }
         return false
+
     }
 
     fun iniciar(nickname: String, password: String): List<Usuario> {

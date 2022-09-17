@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7333bada-2cbd-4c21-811c-816b1377ce8c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entidades/Compra.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Compra.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entidades/Cuenta.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Cuenta.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/InteraccionConElUsuario/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/InteraccionConElUsuario/main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entidades/Usuario.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Usuario.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/repositorios/CompraRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/repositorios/CompraRepositorio.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/repositorios/CuentaRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/repositorios/CuentaRepositorio.kt" afterDir="false" />
@@ -37,14 +36,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Project.color": "1a3735",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "G:/Kotlianpo/fintech-tp1"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Project.color&quot;: &quot;1a3735&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/Kotlianpo/OrangeFintech&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="repositorios" />

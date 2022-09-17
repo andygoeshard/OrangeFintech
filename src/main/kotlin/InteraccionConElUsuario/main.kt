@@ -3,6 +3,7 @@ import entidades.Usuario
 import repositorios.UsuarioRepositorio
 
 fun main(){
+
     val usuario = Usuario("", "")
     println("Bienvenido a orange!")
     funciones()
@@ -52,18 +53,43 @@ fun ingresarUsuario(){
     } while(!UsuarioRepositorio.existe(nombreDeUsuario))
 }
 
-fun crearUsuario(){
+/*      Funcion crear Usuario
+
+* Se crea el objeto usuario vacio y luego se ingresa el nombre y el pw.
+* Al ingresar el pw hace la comprobacion en la propia funcion y en la clase usuario.
+* Si es la funcion de comprobacion retorna true setea la pw del objeto usuario y lo agregar al repositorio
+* El while es para iterar cuando la confirmacion es false. Si entra por false se tiene que ingresar
+* la contraseña infinitamente hasta que se cumpla los requisitos.
+
+*/
+
+fun crearUsuario(): UsuarioRepositorio{
+
+    val nuevo = Usuario("", "")
+    val usuarioEnRepositorio = UsuarioRepositorio()
+    var iteracion = true
+
     println("Ingresar nombre de usuario:")
     val nombreDeUsuario = readln()
-    println("Igresar contraseña:")
-    val contrasenia = readln()
-    println("Confirmar contraseña:")
-    val confirmacion = readln()
-    if(contrasenia.equals(confirmacion) && !UsuarioRepositorio.existe(nombreDeUsuario)) {
-        val nuevo = Usuario(nombreDeUsuario, contrasenia)
-        UsuarioRepositorio.agregar(nuevo)
-    } else {
-        println("El usuario ya existe o la contraseña no coincide con la confirmación")
+
+    while(iteracion){
+        println("Recuerde que: ")
+        println("Su contraseña debe llevar al menos: \n 1 mayuscula \n 1 minuscula \n 1 numero \n 1 caracter especial")
+        println("Igresar contraseña:")
+        val contrasenia = readln()
+        println("Confirmar contraseña:")
+        val confirmacion = readln()
+
+    if (contrasenia.equals(confirmacion) && !usuarioEnRepositorio.existe(nombreDeUsuario) && nuevo.comprobarContraseniaAlCrear(contrasenia)) {
+            nuevo.nickname = nombreDeUsuario
+            iteracion = false
+            usuarioEnRepositorio.agregar(nuevo)
+    }
+    else {
+         println("El usuario ya existe o la contraseña no coincide con la confirmación")
+         println("Recuerde que: ")
+         println("Su contraseña debe llevar al menos: \n 1 mayuscula \n 1 minuscula \n 1 numero \n 1 caracter especial")
+        }
     }
     funciones()
 }

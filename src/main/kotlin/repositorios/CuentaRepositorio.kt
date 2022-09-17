@@ -14,17 +14,20 @@ class CuentaRepositorio {
         cuentas.remove(cuenta)
     }
 
-    fun obtenerPorCodigo(codigoCuenta:Int){
+    fun obtenerPorCodigo(codigoCuenta: Int) {
         //TODO: Completar
-        for(elemento in cuentas){
-            if(elemento.codigoCuenta.equals(codigoCuenta)){
-                print("""
+        for (elemento in cuentas) {
+            if (elemento.codigoCuenta.equals(codigoCuenta)) {
+                print(
+                    """
                    Codigo de Cuenta: ${elemento.codigoCuenta}
                    Nombre: ${elemento.nombre}
                    Apellido: ${elemento.apellido}
                    Dinero en cuenta: $${elemento.dineroEnCuenta}
                    Fecha de alta: ${elemento.fechaAlta}
-                """.trimIndent())
+                """.trimIndent()
+                )
             }
         }
     }
+}

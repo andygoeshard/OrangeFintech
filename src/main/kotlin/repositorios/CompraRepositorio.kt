@@ -14,18 +14,21 @@ class CompraRepositorio {
         this.compra.remove(compra)
     }
 
-    fun obtenerPorCodigo(codigoCompra:Int){
+    fun obtenerPorCodigo(codigoCompra: Int) {
         //TODO: Completar
-        for(elemento in compra){
-            if(elemento.codigoCompra == codigoCompra){
-                println("""
+        for (elemento in compra) {
+            if (elemento.codigoCompra == codigoCompra) {
+                println(
+                    """
                      Codigo de Compra: ${elemento.codigoCompra}
                      Fecha de Compra: ${elemento.fechaCompra}
                      Hora de Compra: ${elemento.horaCompra}
                      Criptomoneda: ${elemento.criptomoneda}
                      Valor Adquirido: $${elemento.valorAdquirido}
                      ValorPagado: $${elemento.valorPagado}
-                """.trimIndent())
+                """.trimIndent()
+                )
             }
         }
     }
+}
