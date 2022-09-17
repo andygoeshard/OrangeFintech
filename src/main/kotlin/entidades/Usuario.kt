@@ -1,8 +1,8 @@
 package entidades
 
-data class Usuario (
+class Usuario (
 
-    val nickname:String,
+    var nickname:String,
     var password:String
 
 ){

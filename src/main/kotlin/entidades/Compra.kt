@@ -8,7 +8,7 @@ data class Compra(
     val codigoCompra: Int,
     val fechaCompra: LocalDate,
     val horaCompra: LocalTime,
-    val criptomoneda: String,
+    val criptomoneda: Criptomonedas,
     val valorAdquirido: Double,
     val valorPagado: Double
 

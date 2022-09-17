@@ -2,9 +2,16 @@ package repositorios
 
 import entidades.Compra
 import entidades.Cuenta
+import java.time.LocalDate
 
-class CuentaRepositorio {
+object CuentaRepositorio {
     val cuentas = mutableListOf<Cuenta>()
+
+    init{
+
+        cuentas.add(Cuenta(1, "Andres", "Aquino", 20000.0, LocalDate.parse("2018-12-31")))
+
+    }
 
     fun agregar(cuenta: Cuenta) {
         cuentas.add(cuenta)

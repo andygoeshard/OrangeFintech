@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7333bada-2cbd-4c21-811c-816b1377ce8c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Criptomonedas.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Exchange.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/InteraccionConElUsuario/MainPruebaKt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/META-INF/fintech-tp1.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/META-INF/fintech-tp1.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Compra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Compra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/CompraRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/CompraRepositorio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/CuentaRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/CuentaRepositorio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/UsuarioRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/UsuarioRepositorio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/InteraccionConElUsuario/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/InteraccionConElUsuario/main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entidades/Compra.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Compra.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/entidades/Usuario.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Usuario.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/repositorios/CompraRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/repositorios/CompraRepositorio.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/repositorios/CuentaRepositorio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/repositorios/CuentaRepositorio.kt" afterDir="false" />
@@ -20,6 +30,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Enum" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -31,7 +42,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2EBjYcRbaAbK8yjoSEktLmxOSMr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

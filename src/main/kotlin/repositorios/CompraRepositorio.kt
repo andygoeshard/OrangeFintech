@@ -3,7 +3,7 @@ package repositorios
 import entidades.Compra
 import java.time.LocalDate
 
-class CompraRepositorio {
+object CompraRepositorio {
     val compra = mutableListOf<Compra>()
 
     fun agregar(compra: Compra) {

@@ -3,8 +3,15 @@ package repositorios
 import entidades.Cuenta
 import entidades.Usuario
 
-class UsuarioRepositorio {
+object UsuarioRepositorio {
+
     val usuarios = mutableListOf<Usuario>()
+
+    init{
+
+        usuarios.add(Usuario("Andy", "And1!"))
+
+    }
 
     fun agregar(usuario: Usuario) {
         if(existe(usuario.nickname)){
