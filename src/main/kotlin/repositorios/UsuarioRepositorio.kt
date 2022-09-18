@@ -1,7 +1,7 @@
 package repositorios
 
-import entidades.Cuenta
 import entidades.Usuario
+import java.time.LocalDate
 
 object UsuarioRepositorio {
 
@@ -9,7 +9,7 @@ object UsuarioRepositorio {
 
     init{
 
-        usuarios.add(Usuario("Andy", "And1!"))
+        usuarios.add(Usuario("Andy", "And1!", 0,"Andres", "Aquino", 2000.0, 0.0, LocalDate.of(2020,1,1)))
 
     }
 
@@ -35,14 +35,35 @@ object UsuarioRepositorio {
 
     }
 
-    fun iniciar(nickname: String, password: String): List<Usuario> {
+    fun iniciar(nickname: String, password: String): Usuario {
         //TODO: Completar
-        val usuariosIniciados = mutableListOf<Usuario>()
+        val usuarioIniciado: Usuario
         for(elemento in usuarios){
             if(elemento.nickname.equals(nickname) && elemento.password.equals(password)){
-                usuariosIniciados.add(elemento)
+                usuarioIniciado = elemento
             }
         }
-        return usuariosIniciados
+        return usuarioIniciado
+    }
+
+    fun obtenerPorCodigo(codigoCuenta:Int){
+        //TODO: Completar
+        for(elemento in usuarios){
+            if(elemento.codigoCuenta.equals(codigoCuenta)){
+                print("""
+                   Codigo de Cuenta: ${elemento.codigoCuenta}
+                   Nombre: ${elemento.nombre}
+                   Apellido: ${elemento.apellido}
+                   Dinero en cuenta: $${elemento.dineroEnCuenta}
+                   Fecha de alta: ${elemento.fechaAlta}
+                """.trimIndent())
+            }
+        }
+    }
+
+    fun editarPorCodigo(codigoCuenta: Int, usuario: Usuario){
+
+        usuarios[codigoCuenta] = usuario
+
     }
 }

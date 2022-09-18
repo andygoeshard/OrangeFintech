@@ -1,6 +1,8 @@
 package InteraccionConElUsuario
 import entidades.Usuario
 import repositorios.UsuarioRepositorio
+import java.time.LocalDate
+
 
 fun main(){
 
@@ -12,14 +14,17 @@ fun main(){
 /* Primer coso */
 
 fun funciones(){
+
     do{
         val opcion = menuInicial()
         when(opcion){
             '1' -> ingresarUsuario()
             '2' -> crearUsuario()
-            '3'-> break
+            '3' -> {println("Adios"); break;}
+            else -> println("No ingreso la opcion correcta")
         }
     } while(opcion != '3')
+
 }
 fun menuInicial(): Char{
     println("""
@@ -34,16 +39,16 @@ fun menuInicial(): Char{
 /* Funcion Ingresar Usuario */
 
 fun ingresarUsuario(){
-    var opcion: Char = ' '
+    var opcion = ' '
 
     do{
         println("Ingresar nombre de usuario:")
         val nombreDeUsuario = readln()
         println("Igresar contraseña:")
         val contrasenia = readln()
+
         if(UsuarioRepositorio.existe(nombreDeUsuario)){
             UsuarioRepositorio.iniciar(nombreDeUsuario, contrasenia)
-            menu()
         } else{
             println("Usuario y/o contraseña incorrecto!")
             println("""
@@ -68,10 +73,17 @@ fun ingresarUsuario(){
 
 fun crearUsuario(){
 
-    var nuevo = Usuario("", "")
+    val tiempoYDiaAhora: LocalDate = LocalDate.now()
+    val nuevo = Usuario("", "", 0, "","", 0.0, 0.0,tiempoYDiaAhora)
     var iteracion = true
 
+    // Asignacion del codigo de usuario. Obtiene el ultimo codigo de usuario de la lista y le suma uno
+
+    val nuevoCodigoUsuario: Int = UsuarioRepositorio.usuarios.last().codigoCuenta + 1
+    nuevo.codigoCuenta = nuevoCodigoUsuario
+
     while(iteracion) {
+
         println("Ingresar nombre de usuario:")
         val nombreDeUsuario = readln()
 
@@ -85,7 +97,6 @@ fun crearUsuario(){
 
         if (contrasenia.equals(confirmacion) && !UsuarioRepositorio.existe(nombreDeUsuario) && nuevo.comprobarContraseniaAlCrear(contrasenia)) {
             nuevo.nickname = nombreDeUsuario
-            UsuarioRepositorio.agregar(nuevo)
             iteracion = false
 
         } else {
@@ -94,6 +105,16 @@ fun crearUsuario(){
             println("Su contraseña debe llevar al menos: \n 1 mayuscula - 1 minuscula \n 1 numero - 1 caracter especial")
         }
     }
+
+    println("Ingresar su nombre: ")
+    var nombrePersonal = readln()
+    println("Ingresar su apellido: ")
+    var apellidoPersonal = readln()
+
+    nuevo.nombre = nombrePersonal
+    nuevo.apellido = apellidoPersonal
+    UsuarioRepositorio.agregar(nuevo)
+
     funciones()
 }
 
@@ -129,7 +150,7 @@ fun comprarCriptomonedas() {
     val opcion = readln()[0]
 }
 
-fun getInfoCuenta() {
+fun getInfoCuenta(){
 
 
 

@@ -1,9 +1,17 @@
 package entidades
 
+import java.time.LocalDate
+
 class Usuario (
 
     var nickname:String,
-    var password:String
+    var password:String,
+    var codigoCuenta: Int,
+    var nombre: String,
+    var apellido: String,
+    var dineroEnCuenta: Double = 0.0,
+    var criptomonedas: Double = 0.0,
+    val fechaAlta: LocalDate
 
 ){
 
