@@ -4,14 +4,14 @@ import java.time.LocalDate
 
 class Usuario (
 
-    var nickname:String,
-    var password:String,
-    var codigoCuenta: Int,
-    var nombre: String,
-    var apellido: String,
+    var nickname: String= "",
+    var password:String = "",
+    var codigoCuenta: Int = 0,
+    var nombre: String = "",
+    var apellido: String = "",
     var dineroEnCuenta: Double = 0.0,
     var criptomonedas: Double = 0.0,
-    val fechaAlta: LocalDate
+    val fechaAlta: LocalDate = LocalDate.now()
 
 ){
 
@@ -47,6 +47,13 @@ class Usuario (
         }
 
         return false
+
+    }
+
+    fun agregarSaldo(saldo: Double): Boolean{
+
+        if(saldo <= 0) return false
+        else this.dineroEnCuenta += saldo; return true;
 
     }
 

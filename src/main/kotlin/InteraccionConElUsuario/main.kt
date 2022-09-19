@@ -7,16 +7,25 @@ import java.time.LocalDate
 fun main(){
 
     println("Bienvenido a orange!")
-    funciones()
+    funcionesPrincipal()
+
+}
+
+fun ingresoOpcion(): Char{
+
+    return readln()[0]
 
 }
 
 /* Primer coso */
 
-fun funciones(){
+fun funcionesPrincipal(){
 
     do{
-        val opcion = menuInicial()
+        menuInicialPrint()
+
+        var opcion = ingresoOpcion()
+
         when(opcion){
             '1' -> ingresarUsuario()
             '2' -> crearUsuario()
@@ -26,39 +35,48 @@ fun funciones(){
     } while(opcion != '3')
 
 }
-fun menuInicial(): Char{
+
+// Solo texto
+
+fun menuInicialPrint(){
     println("""
         1- Ingresar usuario
         2- Crear usuario
         3- Salir
+        Ingrese su opcion: 
     """.trimIndent())
-    val opcion = readln()[0]
-    return opcion
 }
 
 /* Funcion Ingresar Usuario */
 
 fun ingresarUsuario(){
-    var opcion = ' '
+
+    var usuario = Usuario("","",0, "", "", 0.0, 0.0, LocalDate.now())
 
     do{
         println("Ingresar nombre de usuario:")
         val nombreDeUsuario = readln()
-        println("Igresar contraseña:")
+        println("Ingresar contraseña:")
         val contrasenia = readln()
 
         if(UsuarioRepositorio.existe(nombreDeUsuario)){
-            UsuarioRepositorio.iniciar(nombreDeUsuario, contrasenia)
+            usuario = UsuarioRepositorio.iniciar(nombreDeUsuario, contrasenia)
+            menu(usuario)
         } else{
+
             println("Usuario y/o contraseña incorrecto!")
             println("""
                 1- Volver a intentar
                 2- Salir
+                Ingrese su opcion: 
             """.trimIndent())
-            opcion = readln()[0]
-            if(opcion == '2') funciones()
+
+            var opcion = ingresoOpcion()
+
+            if(opcion == '2') funcionesPrincipal()
         }
     } while(!UsuarioRepositorio.existe(nombreDeUsuario))
+
 }
 
 /*      Funcion crear Usuario
@@ -104,64 +122,97 @@ fun crearUsuario(){
             println("Recuerde que: ")
             println("Su contraseña debe llevar al menos: \n 1 mayuscula - 1 minuscula \n 1 numero - 1 caracter especial")
         }
+
     }
 
     println("Ingresar su nombre: ")
-    var nombrePersonal = readln()
+    val nombrePersonal = readln()
     println("Ingresar su apellido: ")
-    var apellidoPersonal = readln()
+    val apellidoPersonal = readln()
 
     nuevo.nombre = nombrePersonal
     nuevo.apellido = apellidoPersonal
     UsuarioRepositorio.agregar(nuevo)
 
-    funciones()
+    funcionesPrincipal()
+
 }
 
 /* Una vez el usuario haya podido ingresar correctamente. */
 
-fun menu(){
+fun menu(usuario: Usuario){
+
+    var usuario = usuario
+
     do{
-        println("""
+        println(
+            """
         1- Comprar criptomonedas
         2- Ver informacion de la cuenta
         3- Ver listado de transacciones
-        4- Desloguear
+        4- Agregar saldo a la cuenta
+        5- Desloguear
+        Ingrese su opcion: 
     """.trimIndent())
         val opcion = readln()[0]
         when(opcion){
             '1' -> comprarCriptomonedas()
-            '2' -> getInfoCuenta()
+            '2' -> getInfoCuenta(usuario)
             '3' -> getListaDeTransacciones()
-            '4' -> break
+            '4' -> agregarSaldo(usuario)
+            '5' -> break
         }
-    } while(opcion != '4')
+    } while(opcion != '5')
+
 }
 
 // 1 - Comprar Criptomonedas.
 
 fun comprarCriptomonedas() {
+
     println("Selecciona un exchange:")
     println("""
         1- Criptomas
         2- Criptodia
         3- Carrecripto
+        Ingrese su opcion: 
     """.trimIndent())
-    val opcion = readln()[0]
-}
-
-fun getInfoCuenta(){
-
-
+    val opcion = ingresoOpcion()
 
 }
 
-fun desloguear() {
-    //UsuarioRepositorio.eliminar()
+fun getInfoCuenta(usuario: Usuario){
+
+    val codigoUsuario: Int = usuario.codigoCuenta
+    UsuarioRepositorio.obtenerPorCodigo(codigoUsuario)
+
 }
 
 fun getListaDeTransacciones() {
-    TODO("Not yet implemented")
+
+    // FALTA COMPRAR CRIPTOS, AGREGAR A LA LISTA DE COMPRA Y COMPRA REPOSITORIO.
+
+}
+
+fun agregarSaldo(usuario: Usuario){
+
+    var iteracion = true
+
+    while(iteracion) {
+
+        println("Ingrese el saldo para agregar a la cuenta: ")
+        var saldo = readln().toDouble()
+        if(usuario.agregarSaldo(saldo)) {
+            // Romper la iteracion, agregar saldo a la cuenta y guardarlo en UsuarioRepositorio
+            iteracion = false
+            var codigoDeLaCuenta: Int = usuario.codigoCuenta
+            UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
+            println("Saldo agregado correctamente.\n")
+        }
+        else println("No ingreso un valor valido.\n")
+
+    }
+
 }
 
 

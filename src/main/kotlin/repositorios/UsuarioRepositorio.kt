@@ -9,7 +9,11 @@ object UsuarioRepositorio {
 
     init{
 
+        // Cuentas predefinidas
+
         usuarios.add(Usuario("Andy", "And1!", 0,"Andres", "Aquino", 2000.0, 0.0, LocalDate.of(2020,1,1)))
+        usuarios.add(Usuario("Andres", "And1!", 1,"Andres", "Aquino", 5000.0, 0.0, LocalDate.of(2021,2,3)))
+        usuarios.add(Usuario("Andresito", "And1!", 2,"Andres", "Aquino", 20000.0, 0.0, LocalDate.of(2022,1,1)))
 
     }
 
@@ -35,9 +39,9 @@ object UsuarioRepositorio {
 
     }
 
-    fun iniciar(nickname: String, password: String): Usuario {
+    fun iniciar(nickname: String, password: String): Usuario{
         //TODO: Completar
-        val usuarioIniciado: Usuario
+        var usuarioIniciado = Usuario()
         for(elemento in usuarios){
             if(elemento.nickname.equals(nickname) && elemento.password.equals(password)){
                 usuarioIniciado = elemento
@@ -51,11 +55,13 @@ object UsuarioRepositorio {
         for(elemento in usuarios){
             if(elemento.codigoCuenta.equals(codigoCuenta)){
                 print("""
+                   - Información de Usuario -
                    Codigo de Cuenta: ${elemento.codigoCuenta}
                    Nombre: ${elemento.nombre}
                    Apellido: ${elemento.apellido}
                    Dinero en cuenta: $${elemento.dineroEnCuenta}
                    Fecha de alta: ${elemento.fechaAlta}
+                   
                 """.trimIndent())
             }
         }
