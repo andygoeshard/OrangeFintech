@@ -46,19 +46,8 @@ class Usuario (
         return false
     }
 
-    fun agregarSaldo(saldo: Double): Boolean{
-
-        if(saldo <= 0) return false
-        else this.dineroEnCuenta += saldo; return true;
-
-    }
-
-    fun checkDineroACambiar(dinero: Double): Boolean{
-
-        if(dinero > dineroEnCuenta || dinero <= 0) return false
-        else return true
-
-    }
+    fun agregarSaldo(saldo: Double): Boolean{ if(saldo <= 0) return false else this.dineroEnCuenta += saldo; return true; }
+    fun checkDineroACambiar(dinero: Double): Boolean{  if(dinero > dineroEnCuenta || dinero <= 0) return false else return true }
 
 
 

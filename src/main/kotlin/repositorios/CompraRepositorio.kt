@@ -41,8 +41,9 @@ object CompraRepositorio {
             }
         }
     }
-
     fun obtenerListaCompraPorUsuario(nickname: String){
+
+        var obtuvoInformacion = false
 
         for (elemento in compra) {
             if(elemento.usuario.equals(nickname)){
@@ -60,23 +61,17 @@ object CompraRepositorio {
                      --------------------------------------------- 
                 """.trimIndent()
                 )
-
-
+                obtuvoInformacion = true
             }
-
         }
-
+        if(!obtuvoInformacion) println("No se han encontrado registros.\n")
     }
 
     private fun stringuearTipoCripto(criptomoneda: Criptomonedas): String {
         when(criptomoneda){
-
             Criptomonedas.CRIPTOMAS -> return "Criptomas"
             Criptomonedas.CRIPTODIA -> return "Criptodia"
             Criptomonedas.CARRECRIPTO -> return "Carrecripto"
         }
-
     }
-
-
 }

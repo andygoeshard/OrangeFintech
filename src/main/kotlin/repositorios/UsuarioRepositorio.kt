@@ -18,20 +18,18 @@ object UsuarioRepositorio {
     }
 
     fun agregar(usuario: Usuario) {
-        if(existe(usuario.nickname)){
-            //TODO fallar
-        }
-        usuarios.add(usuario)
+        if(existe(usuario.nickname, usuario.password)) println("Error al agregar la cuenta.")
+        else usuarios.add(usuario)
     }
 
     fun eliminar(usuario: Usuario) {
         usuarios.remove(usuario)
     }
 
-    fun existe(nickname: String): Boolean {
+    fun existe(nickname: String, password: String): Boolean {
 
         for(elemento in usuarios){
-            if(elemento.nickname.equals(nickname)) {
+            if(elemento.nickname.equals(nickname) && elemento.password.equals(password)) {
                 return true
             }
         }
@@ -40,7 +38,7 @@ object UsuarioRepositorio {
     }
 
     fun iniciar(nickname: String, password: String): Usuario{
-        //TODO: Completar
+
         var usuarioIniciado = Usuario()
         for(elemento in usuarios){
             if(elemento.nickname.equals(nickname) && elemento.password.equals(password)){
@@ -51,7 +49,7 @@ object UsuarioRepositorio {
     }
 
     fun obtenerPorCodigo(codigoCuenta:Int){
-        //TODO: Completar
+
         for(elemento in usuarios){
             if(elemento.codigoCuenta.equals(codigoCuenta)){
                 print("""
@@ -67,10 +65,5 @@ object UsuarioRepositorio {
             }
         }
     }
-
-    fun editarPorCodigo(codigoCuenta: Int, usuario: Usuario){
-
-        usuarios[codigoCuenta] = usuario
-
-    }
+    fun editarPorCodigo(codigoCuenta: Int, usuario: Usuario){ usuarios[codigoCuenta] = usuario }
 }

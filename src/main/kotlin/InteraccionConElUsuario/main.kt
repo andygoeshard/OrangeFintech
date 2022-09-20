@@ -4,6 +4,8 @@ import repositorios.CompraRepositorio
 import repositorios.UsuarioRepositorio
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.Period
+
 
 fun main(){
 
@@ -60,7 +62,7 @@ fun ingresarUsuario(){
         println("Ingresar contraseña:")
         val contrasenia = readln()
 
-        if(UsuarioRepositorio.existe(nombreDeUsuario)){
+        if(UsuarioRepositorio.existe(nombreDeUsuario, contrasenia)){
             usuario = UsuarioRepositorio.iniciar(nombreDeUsuario, contrasenia)
             menu(usuario)
         } else{
@@ -76,7 +78,7 @@ fun ingresarUsuario(){
 
             if(opcion == '2') funcionesPrincipal()
         }
-    } while(!UsuarioRepositorio.existe(nombreDeUsuario))
+    } while(!UsuarioRepositorio.existe(nombreDeUsuario, contrasenia))
 
 }
 
@@ -114,7 +116,7 @@ fun crearUsuario(){
         println("Confirmar contraseña:")
         val confirmacion = readln()
 
-        if (contrasenia.equals(confirmacion) && !UsuarioRepositorio.existe(nombreDeUsuario) && nuevo.comprobarContraseniaAlCrear(contrasenia)) {
+        if (contrasenia.equals(confirmacion) && !UsuarioRepositorio.existe(nombreDeUsuario,contrasenia) && nuevo.comprobarContraseniaAlCrear(contrasenia)) {
             nuevo.nickname = nombreDeUsuario
             iteracion = false
 
@@ -164,7 +166,6 @@ fun menu(usuario: Usuario){
             '5' -> break
         }
     } while(opcion != '5')
-
 }
 
 // 1 - Comprar Criptomonedas.
@@ -204,10 +205,11 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
 
     val dineroACambiar = readLine()!!.toDouble()
     val comision = (dineroACambiar.times(Criptomas.calcularComision()))
-
     val dineroACambiarMasComision = dineroACambiar.plus(comision)
+    val cashback = (dineroACambiarMasComision.times(otorgarCashback(usuario)))
+    val dineroACambiarMasComisionMenosCashback = dineroACambiarMasComision.minus(cashback)
 
-    if(usuario.checkDineroACambiar(dineroACambiarMasComision)) {
+    if(usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)) {
 
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
@@ -215,15 +217,15 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
         val valorTotalCriptomonedas = (dineroACambiar.times(VALOR_CRIPTOMONEDA)).div(VALOR_DINERO)
 
         usuario.criptomonedasEnCuenta += valorTotalCriptomonedas
-        usuario.dineroEnCuenta -= dineroACambiar
-        usuario.dineroEnCuenta -= comision
+        usuario.dineroEnCuenta -= dineroACambiarMasComisionMenosCashback
 
         val comisionString = "2%"
 
+        println("Se cobro una comision de $ ${comision} (${comisionString}) \nUsted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \n" +
+                "Se otorgó un cashback de $cashback \nMuchas gracias por la compra.")
+
         // Funcion Agregar nueva compra
         agregarNuevaCompra(usuario.nickname, CompraRepositorio.compra.last().codigoCompra + 1, LocalDate.now(), LocalTime.now(), Criptomonedas.CRIPTOMAS, valorTotalCriptomonedas, dineroACambiar, comisionString)
-
-        println("Se cobro una comision de $ ${comision} (${comisionString}) \n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \nMuchas gracias por la compra.")
 
         // Guardar cuenta en repositorio
         val codigoDeLaCuenta: Int = usuario.codigoCuenta
@@ -242,10 +244,11 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
 
     val dineroACambiar = readLine()!!.toDouble()
     val comision = (dineroACambiar.times(Criptodia.calcularComision()))
-
     val dineroACambiarMasComision = dineroACambiar.plus(comision)
+    val cashback = (dineroACambiarMasComision.times(otorgarCashback(usuario)))
+    val dineroACambiarMasComisionMenosCashback = dineroACambiarMasComision.minus(cashback)
 
-    if(usuario.checkDineroACambiar(dineroACambiarMasComision)) {
+    if(usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)) {
 
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
@@ -253,13 +256,12 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
         val valorTotalCriptomonedas = (dineroACambiar.times(VALOR_CRIPTOMONEDA)).div(VALOR_DINERO)
 
         usuario.criptomonedasEnCuenta += valorTotalCriptomonedas
-        usuario.dineroEnCuenta -= dineroACambiar
+        usuario.dineroEnCuenta -= dineroACambiarMasComisionMenosCashback
 
-
-        usuario.dineroEnCuenta -= comision
         val comisionString= if(Criptodia.calcularComision() == 0.01) "1%" else "3%"
 
-        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptodia \nMuchas gracias por la compra.")
+        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptodia \n" +
+                " Se otorgó un cashback de $cashback \nMuchas gracias por la compra.")
 
         // Funcion Agregar nueva compra
 
@@ -281,11 +283,14 @@ fun compraCriptomonedasCarrecripto(usuario: Usuario){
     println("Ingrese un valor para comprar criptomonedas: ")
 
     val dineroACambiar = readLine()!!.toDouble()
+
     val comision = (dineroACambiar.times(Carrecripto.calcularComision()))
 
     val dineroACambiarMasComision = dineroACambiar.plus(comision)
+    val cashback = (dineroACambiarMasComision.times(otorgarCashback(usuario)))
+    val dineroACambiarMasComisionMenosCashback = dineroACambiarMasComision.minus(cashback)
 
-    if(usuario.checkDineroACambiar(dineroACambiarMasComision)) {
+    if(usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)) {
 
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
@@ -293,17 +298,15 @@ fun compraCriptomonedasCarrecripto(usuario: Usuario){
         val valorTotalCriptomonedas = (dineroACambiar.times(VALOR_CRIPTOMONEDA)).div(VALOR_DINERO)
 
         usuario.criptomonedasEnCuenta += valorTotalCriptomonedas
-        usuario.dineroEnCuenta -= dineroACambiar
+        usuario.dineroEnCuenta -= dineroACambiarMasComisionMenosCashback
 
-        usuario.dineroEnCuenta -= comision
         val comisionString = if(Carrecripto.calcularComision() == 0.03) "(3%)" else "(0.75%)"
 
-        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Carrecripto \n Muchas gracias por la compra.")
+        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Carrecripto \n Se otorgó un cashback de $cashback \n Muchas gracias por la compra.")
 
         // Funcion Agregar nueva compra
 
         agregarNuevaCompra(usuario.nickname, CompraRepositorio.compra.last().codigoCompra + 1, LocalDate.now(), LocalTime.now(), Criptomonedas.CARRECRIPTO, valorTotalCriptomonedas, dineroACambiar, comisionString)
-
 
         // Guardar cuenta en repositorio
         val codigoDeLaCuenta: Int = usuario.codigoCuenta
@@ -323,7 +326,7 @@ private fun agregarNuevaCompra(usuarioNickname: String, nuevoCodigoCompra: Int, 
 
 }
 
-// muestra informacion de la cuenta activa.
+// Muestra informacion de la cuenta activa.
 
 
 fun getInfoCuenta(usuario: Usuario){
@@ -363,6 +366,24 @@ fun agregarSaldo(usuario: Usuario){
     }
 
 }
+
+fun otorgarCashback(usuario: Usuario): Double {
+
+    var cashback = 0.0
+    cashback = if (Period.between(usuario.fechaAlta, LocalDate.now()).toTotalMonths() <= 3) {
+        0.05
+    } else if (Period.between(usuario.fechaAlta, LocalDate.now()).toTotalMonths() <= 12){
+        0.03
+    } else {
+        0.0
+    }
+    return cashback
+}
+
+
+
+
+
 
 
 
