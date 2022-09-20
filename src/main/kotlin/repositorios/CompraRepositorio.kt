@@ -9,7 +9,7 @@ object CompraRepositorio {
     val compra = mutableListOf<Compra>()
 
     init {
-        CompraRepositorio.agregar(Compra("Andy", 0, LocalDate.of(2021,3,1), LocalTime.of(17,10,1), Criptomonedas.CRIPTODIA, 200.0, 10000.0))
+        CompraRepositorio.agregar(Compra("Andy", 0, LocalDate.of(2021,3,1), LocalTime.of(17,10,1), Criptomonedas.CRIPTODIA, 200.0, 10000.0, "2%"))
     }
 
     fun agregar(compra: Compra) {
@@ -56,7 +56,8 @@ object CompraRepositorio {
                      Hora de Compra: ${elemento.horaCompra}
                      Criptomoneda: ${nombreCriptomoneda}
                      Valor Adquirido: $${elemento.valorAdquirido}
-                     ValorPagado: $${elemento.valorPagado}
+                     Valor Pagado: $${elemento.valorPagado}
+                     Valor comision: ${elemento.comision} 
                      --------------------------------------------- 
                 """.trimIndent()
                 )
@@ -69,7 +70,6 @@ object CompraRepositorio {
     }
 
     private fun stringuearTipoCripto(criptomoneda: Criptomonedas): String {
-
         when(criptomoneda){
 
             Criptomonedas.CRIPTOMAS -> return "Criptomas"
