@@ -220,8 +220,8 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
 
         val comisionString = "2%"
 
+        // Funcion Agregar nueva compra
         agregarNuevaCompra(usuario.nickname, CompraRepositorio.compra.last().codigoCompra + 1, LocalDate.now(), LocalTime.now(), Criptomonedas.CRIPTOMAS, valorTotalCriptomonedas, dineroACambiar, comisionString)
-
 
         println("Se cobro una comision de $ ${comision} (${comisionString}) \n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \nMuchas gracias por la compra.")
 
@@ -259,7 +259,7 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
         usuario.dineroEnCuenta -= comision
         val comisionString= if(Criptodia.calcularComision() == 0.01) "1%" else "3%"
 
-        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \nMuchas gracias por la compra.")
+        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptodia \nMuchas gracias por la compra.")
 
         // Funcion Agregar nueva compra
 
@@ -298,7 +298,7 @@ fun compraCriptomonedasCarrecripto(usuario: Usuario){
         usuario.dineroEnCuenta -= comision
         val comisionString = if(Carrecripto.calcularComision() == 0.03) "(3%)" else "(0.75%)"
 
-        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \n Muchas gracias por la compra.")
+        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Carrecripto \n Muchas gracias por la compra.")
 
         // Funcion Agregar nueva compra
 

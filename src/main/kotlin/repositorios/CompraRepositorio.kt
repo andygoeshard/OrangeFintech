@@ -45,7 +45,6 @@ object CompraRepositorio {
     fun obtenerListaCompraPorUsuario(nickname: String){
 
         for (elemento in compra) {
-
             if(elemento.usuario.equals(nickname)){
                 val nombreCriptomoneda: String = stringuearTipoCripto(elemento.criptomoneda)
                 println(
