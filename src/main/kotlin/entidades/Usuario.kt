@@ -10,7 +10,7 @@ class Usuario (
     var nombre: String = "",
     var apellido: String = "",
     var dineroEnCuenta: Double = 0.0,
-    var criptomonedas: Double = 0.0,
+    var criptomonedasEnCuenta: Double = 0.0,
     val fechaAlta: LocalDate = LocalDate.now()
 
 ){
@@ -27,14 +27,14 @@ class Usuario (
          Por ejemplo si contiene mayus su booleano es true. Al final de la comprobacion
          tiene que ser todos true. */
 
-        val arrayChar_Del_String_contrasenia = contrasenia.toCharArray()
+        val arrayCharContrasenia = contrasenia.toCharArray()
 
-        for(i in arrayChar_Del_String_contrasenia.indices){
+        for(i in arrayCharContrasenia.indices){
 
-            if(arrayChar_Del_String_contrasenia[i].isDigit()) contieneNumero = true
-            else if(arrayChar_Del_String_contrasenia[i].isUpperCase()) contieneMayuscula = true
-            else if(arrayChar_Del_String_contrasenia[i].isLowerCase()) contieneMinuscula = true
-            else if(!arrayChar_Del_String_contrasenia[i].isLetterOrDigit()) contieneCaracterEspecial = true
+            if(arrayCharContrasenia[i].isDigit()) contieneNumero = true
+            else if(arrayCharContrasenia[i].isUpperCase()) contieneMayuscula = true
+            else if(arrayCharContrasenia[i].isLowerCase()) contieneMinuscula = true
+            else if(!arrayCharContrasenia[i].isLetterOrDigit()) contieneCaracterEspecial = true
 
             if(contieneMayuscula == true && contieneMinuscula == true && contieneNumero == true && contieneCaracterEspecial == true) {
 
@@ -42,12 +42,8 @@ class Usuario (
                 return true
 
             }
-
-
         }
-
         return false
-
     }
 
     fun agregarSaldo(saldo: Double): Boolean{
@@ -56,5 +52,14 @@ class Usuario (
         else this.dineroEnCuenta += saldo; return true;
 
     }
+
+    fun checkDineroACambiar(dinero: Double): Boolean{
+
+        if(dinero > dineroEnCuenta || dinero <= 0) return false
+        else return true
+
+    }
+
+
 
 }

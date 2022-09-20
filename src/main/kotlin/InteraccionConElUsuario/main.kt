@@ -1,8 +1,9 @@
 package InteraccionConElUsuario
-import entidades.Usuario
+import entidades.*
+import repositorios.CompraRepositorio
 import repositorios.UsuarioRepositorio
 import java.time.LocalDate
-
+import java.time.LocalTime
 
 fun main(){
 
@@ -17,14 +18,14 @@ fun ingresoOpcion(): Char{
 
 }
 
-/* Primer coso */
+/* Menu principal */
 
 fun funcionesPrincipal(){
 
     do{
         menuInicialPrint()
 
-        var opcion = ingresoOpcion()
+        val opcion = ingresoOpcion()
 
         when(opcion){
             '1' -> ingresarUsuario()
@@ -51,7 +52,7 @@ fun menuInicialPrint(){
 
 fun ingresarUsuario(){
 
-    var usuario = Usuario("","",0, "", "", 0.0, 0.0, LocalDate.now())
+    var usuario: Usuario
 
     do{
         println("Ingresar nombre de usuario:")
@@ -71,7 +72,7 @@ fun ingresarUsuario(){
                 Ingrese su opcion: 
             """.trimIndent())
 
-            var opcion = ingresoOpcion()
+            val opcion = ingresoOpcion()
 
             if(opcion == '2') funcionesPrincipal()
         }
@@ -142,7 +143,7 @@ fun crearUsuario(){
 
 fun menu(usuario: Usuario){
 
-    var usuario = usuario
+    val usuarioActivo = usuario
 
     do{
         println(
@@ -156,10 +157,10 @@ fun menu(usuario: Usuario){
     """.trimIndent())
         val opcion = readln()[0]
         when(opcion){
-            '1' -> comprarCriptomonedas()
-            '2' -> getInfoCuenta(usuario)
-            '3' -> getListaDeTransacciones()
-            '4' -> agregarSaldo(usuario)
+            '1' -> comprarCriptomonedas(usuarioActivo)
+            '2' -> getInfoCuenta(usuarioActivo)
+            '3' -> getListaDeTransacciones(usuarioActivo)
+            '4' -> agregarSaldo(usuarioActivo)
             '5' -> break
         }
     } while(opcion != '5')
@@ -168,18 +169,162 @@ fun menu(usuario: Usuario){
 
 // 1 - Comprar Criptomonedas.
 
-fun comprarCriptomonedas() {
+fun comprarCriptomonedas(usuario: Usuario) {
+
+    val usuarioActivo = usuario
 
     println("Selecciona un exchange:")
-    println("""
+    println(
+        """
         1- Criptomas
         2- Criptodia
         3- Carrecripto
         Ingrese su opcion: 
-    """.trimIndent())
+    """.trimIndent()
+    )
+
     val opcion = ingresoOpcion()
+    when(opcion){
+
+        '1' -> compraCriptomonedasCriptomas(usuarioActivo)
+        '2' -> compraCriptomonedasCriptodia(usuarioActivo)
+        '3' -> compraCriptomonedasCarrecripto(usuarioActivo)
+        '4' -> println("No ingreso una opcion correcta")
+
+    }
+}
+
+// Funciones de comprar criptomonedas
+
+fun compraCriptomonedasCriptomas(usuario: Usuario){
+
+    println("Usted tiene $ ${usuario.dineroEnCuenta} en su cuenta disponible para comprar.")
+    println("Usted tiene ${usuario.criptomonedasEnCuenta} Criptomonedas en su cuenta.")
+    println("Ingrese un valor para comprar criptomonedas: ")
+
+    val dineroACambiar = readLine()!!.toDouble()
+    val comision = (dineroACambiar.times(Criptomas.calcularComision()))
+
+    val dineroACambiarMasComision = dineroACambiar.plus(comision)
+
+    if(usuario.checkDineroACambiar(dineroACambiarMasComision)) {
+
+        val VALOR_CRIPTOMONEDA = 1.0
+        val VALOR_DINERO = 50.0
+
+        val valorTotalCriptomonedas = (dineroACambiar.times(VALOR_CRIPTOMONEDA)).div(VALOR_DINERO)
+
+        usuario.criptomonedasEnCuenta += valorTotalCriptomonedas
+        usuario.dineroEnCuenta -= dineroACambiar
+        usuario.dineroEnCuenta -= comision
+
+        val comisionString = "2%"
+
+        agregarNuevaCompra(usuario.nickname, CompraRepositorio.compra.last().codigoCompra + 1, LocalDate.now(), LocalTime.now(), Criptomonedas.CRIPTOMAS, valorTotalCriptomonedas, dineroACambiar, comisionString)
+
+
+        println("Se cobro una comision de $ ${comision} (${comisionString}) \n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \nMuchas gracias por la compra.")
+
+        // Guardar cuenta en repositorio
+        val codigoDeLaCuenta: Int = usuario.codigoCuenta
+        UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
+    }
+    else{
+        println("Error, no se pudo realizar la transaccion.")
+    }
+}
+
+fun compraCriptomonedasCriptodia(usuario: Usuario){
+
+    println("Usted tiene $ ${usuario.dineroEnCuenta} en su cuenta disponible para comprar.")
+    println("Usted tiene ${usuario.criptomonedasEnCuenta} Criptomonedas en su cuenta.")
+    println("Ingrese un valor para comprar criptomonedas: ")
+
+    val dineroACambiar = readLine()!!.toDouble()
+    val comision = (dineroACambiar.times(Criptodia.calcularComision()))
+
+    val dineroACambiarMasComision = dineroACambiar.plus(comision)
+
+    if(usuario.checkDineroACambiar(dineroACambiarMasComision)) {
+
+        val VALOR_CRIPTOMONEDA = 1.0
+        val VALOR_DINERO = 50.0
+
+        val valorTotalCriptomonedas = (dineroACambiar.times(VALOR_CRIPTOMONEDA)).div(VALOR_DINERO)
+
+        usuario.criptomonedasEnCuenta += valorTotalCriptomonedas
+        usuario.dineroEnCuenta -= dineroACambiar
+
+
+        usuario.dineroEnCuenta -= comision
+        val comisionString= if(Criptodia.calcularComision() == 0.01) "1%" else "3%"
+
+        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \nMuchas gracias por la compra.")
+
+        // Funcion Agregar nueva compra
+
+        agregarNuevaCompra(usuario.nickname, CompraRepositorio.compra.last().codigoCompra + 1, LocalDate.now(), LocalTime.now(), Criptomonedas.CRIPTODIA, valorTotalCriptomonedas, dineroACambiar, comisionString)
+
+        // Guardar cuenta en repositorio
+        val codigoDeLaCuenta: Int = usuario.codigoCuenta
+        UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
+    }
+    else{
+        println("Error, no se pudo realizar la transaccion.")
+    }
+}
+
+fun compraCriptomonedasCarrecripto(usuario: Usuario){
+
+    println("Usted tiene $ ${usuario.dineroEnCuenta} en su cuenta disponible para comprar.")
+    println("Usted tiene ${usuario.criptomonedasEnCuenta} Criptomonedas en su cuenta.")
+    println("Ingrese un valor para comprar criptomonedas: ")
+
+    val dineroACambiar = readLine()!!.toDouble()
+    val comision = (dineroACambiar.times(Carrecripto.calcularComision()))
+
+    val dineroACambiarMasComision = dineroACambiar.plus(comision)
+
+    if(usuario.checkDineroACambiar(dineroACambiarMasComision)) {
+
+        val VALOR_CRIPTOMONEDA = 1.0
+        val VALOR_DINERO = 50.0
+
+        val valorTotalCriptomonedas = (dineroACambiar.times(VALOR_CRIPTOMONEDA)).div(VALOR_DINERO)
+
+        usuario.criptomonedasEnCuenta += valorTotalCriptomonedas
+        usuario.dineroEnCuenta -= dineroACambiar
+
+        usuario.dineroEnCuenta -= comision
+        val comisionString = if(Carrecripto.calcularComision() == 0.03) "(3%)" else "(0.75%)"
+
+        println("Se cobro una comision de $ ${comision} ${comisionString}\n Usted compro ${valorTotalCriptomonedas} Criptomonedas de Criptomas \n Muchas gracias por la compra.")
+
+        // Funcion Agregar nueva compra
+
+        agregarNuevaCompra(usuario.nickname, CompraRepositorio.compra.last().codigoCompra + 1, LocalDate.now(), LocalTime.now(), Criptomonedas.CARRECRIPTO, valorTotalCriptomonedas, dineroACambiar, comisionString)
+
+
+        // Guardar cuenta en repositorio
+        val codigoDeLaCuenta: Int = usuario.codigoCuenta
+        UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
+    }
+    else{
+        println("Error, no se pudo realizar la transaccion.")
+    }
+}
+
+// Agregar nueva compra usado en funciones de comprar criptomonedas
+
+private fun agregarNuevaCompra(usuarioNickname: String, nuevoCodigoCompra: Int, fechaAhora: LocalDate, horaAhora: LocalTime, criptomonedaTipo: Criptomonedas, valorTotalCriptomonedas: Double, dineroACambiar: Double, comision: String){
+
+    val nuevaCompra = Compra(usuarioNickname, nuevoCodigoCompra, fechaAhora, horaAhora, criptomonedaTipo, valorTotalCriptomonedas, dineroACambiar, comision)
+    CompraRepositorio.agregar(nuevaCompra)
 
 }
+
+// muestra informacion de la cuenta activa.
+
 
 fun getInfoCuenta(usuario: Usuario){
 
@@ -188,11 +333,15 @@ fun getInfoCuenta(usuario: Usuario){
 
 }
 
-fun getListaDeTransacciones() {
+// Muestra informacion de las compras de la cuenta activa
 
-    // FALTA COMPRAR CRIPTOS, AGREGAR A LA LISTA DE COMPRA Y COMPRA REPOSITORIO.
+fun getListaDeTransacciones(usuario: Usuario) {
+
+    CompraRepositorio.obtenerListaCompraPorUsuario(usuario.nickname)
 
 }
+
+// Agrega saldo a la cuenta activa
 
 fun agregarSaldo(usuario: Usuario){
 
@@ -201,11 +350,11 @@ fun agregarSaldo(usuario: Usuario){
     while(iteracion) {
 
         println("Ingrese el saldo para agregar a la cuenta: ")
-        var saldo = readln().toDouble()
+        val saldo = readln().toDouble()
         if(usuario.agregarSaldo(saldo)) {
             // Romper la iteracion, agregar saldo a la cuenta y guardarlo en UsuarioRepositorio
             iteracion = false
-            var codigoDeLaCuenta: Int = usuario.codigoCuenta
+            val codigoDeLaCuenta: Int = usuario.codigoCuenta
             UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
             println("Saldo agregado correctamente.\n")
         }

@@ -11,6 +11,6 @@ data class Compra(
     val horaCompra: LocalTime,
     val criptomoneda: Criptomonedas,
     val valorAdquirido: Double,
-    val valorPagado: Double
-
+    val valorPagado: Double,
+    val comision: String
 )

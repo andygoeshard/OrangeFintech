@@ -60,6 +60,7 @@ object UsuarioRepositorio {
                    Nombre: ${elemento.nombre}
                    Apellido: ${elemento.apellido}
                    Dinero en cuenta: $${elemento.dineroEnCuenta}
+                   Criptomonedas en cuenta: $${elemento.criptomonedasEnCuenta}
                    Fecha de alta: ${elemento.fechaAlta}
                    
                 """.trimIndent())
