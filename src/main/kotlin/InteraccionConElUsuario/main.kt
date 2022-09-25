@@ -204,8 +204,11 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
     val cashback = (dineroACambiarMasComision.times(otorgarCashback(usuario)))
     val dineroACambiarMasComisionMenosCashback = dineroACambiarMasComision.minus(cashback)
 
-    if(usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)) {
-
+    try{
+        usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)
+    } catch(e: SaldoInsuficiente){
+        println("Error, no se pudo realizar la transaccion.")
+    } finally {
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
 
@@ -226,9 +229,6 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
         val codigoDeLaCuenta: Int = usuario.codigoCuenta
         UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
     }
-    else{
-        println("Error, no se pudo realizar la transaccion.")
-    }
 }
 
 fun compraCriptomonedasCriptodia(usuario: Usuario){
@@ -243,8 +243,11 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
     val cashback = (dineroACambiarMasComision.times(otorgarCashback(usuario)))
     val dineroACambiarMasComisionMenosCashback = dineroACambiarMasComision.minus(cashback)
 
-    if(usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)) {
-
+   try{
+        usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)
+    } catch(e: SaldoInsuficiente){
+        println("Error, no se pudo realizar la transaccion.")
+    } finally {
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
 
@@ -266,9 +269,6 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
         val codigoDeLaCuenta: Int = usuario.codigoCuenta
         UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
     }
-    else{
-        println("Error, no se pudo realizar la transaccion.")
-    }
 }
 
 fun compraCriptomonedasCarrecripto(usuario: Usuario){
@@ -285,8 +285,11 @@ fun compraCriptomonedasCarrecripto(usuario: Usuario){
     val cashback = (dineroACambiarMasComision.times(otorgarCashback(usuario)))
     val dineroACambiarMasComisionMenosCashback = dineroACambiarMasComision.minus(cashback)
 
-    if(usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)) {
-
+    try{
+        usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)
+    } catch(e: SaldoInsuficiente){
+        println("Error, no se pudo realizar la transaccion.")
+    } finally {
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
 
@@ -306,9 +309,6 @@ fun compraCriptomonedasCarrecripto(usuario: Usuario){
         // Guardar cuenta en repositorio
         val codigoDeLaCuenta: Int = usuario.codigoCuenta
         UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
-    }
-    else{
-        println("Error, no se pudo realizar la transaccion.")
     }
 }
 
