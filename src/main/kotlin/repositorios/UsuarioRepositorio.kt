@@ -38,14 +38,9 @@ object UsuarioRepositorio {
     }
 
     fun iniciar(nickname: String, password: String): Usuario{
-
         var usuarioIniciado = Usuario()
         for(elemento in usuarios){
-            if(elemento.nickname.equals(nickname) && elemento.password.equals(password)){
-                usuarioIniciado = elemento
-            } else {
-                throw ErrorAlIngresar("Usuario y/o contraseña incorrectos")
-            }
+            if(existe(nickname, password)) usuarioIniciado = elemento else throw ErrorAlIngresar("Usuario y/o contraseña incorrectos")
         }
         return usuarioIniciado
     }
