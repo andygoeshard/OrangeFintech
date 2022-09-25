@@ -53,15 +53,13 @@ fun menuInicialPrint(){
 /* Funcion Ingresar Usuario */
 
 fun ingresarUsuario(){
+        var usuario: Usuario
 
-    var usuario: Usuario
-
-    do{
         println("Ingresar nombre de usuario:")
         val nombreDeUsuario = readln()
         println("Ingresar contraseña:")
         val contrasenia = readln()
-        
+
         try {
             usuario = UsuarioRepositorio.iniciar(nombreDeUsuario, contrasenia)
             menu(usuario)
@@ -77,25 +75,6 @@ fun ingresarUsuario(){
 
             if(opcion == '2') funcionesPrincipal() else if(opcion == '1') ingresarUsuario()
         }
-
-        /*if(UsuarioRepositorio.existe(nombreDeUsuario, contrasenia)){
-            usuario = UsuarioRepositorio.iniciar(nombreDeUsuario, contrasenia)
-            menu(usuario)
-        } else{
-
-            println("Usuario y/o contraseña incorrecto!")
-            println("""
-                1- Volver a intentar
-                2- Salir
-                Ingrese su opcion: 
-            """.trimIndent())
-
-            val opcion = ingresoOpcion()
-
-            if(opcion == '2') funcionesPrincipal()
-        }*/
-    } while(!UsuarioRepositorio.existe(nombreDeUsuario, contrasenia))
-
 }
 
 /*      Funcion crear Usuario
