@@ -43,6 +43,8 @@ object UsuarioRepositorio {
         for(elemento in usuarios){
             if(elemento.nickname.equals(nickname) && elemento.password.equals(password)){
                 usuarioIniciado = elemento
+            } else {
+                throw ErrorAlIngresar("Usuario y/o contraseña incorrectos")
             }
         }
         return usuarioIniciado
@@ -67,3 +69,5 @@ object UsuarioRepositorio {
     }
     fun editarPorCodigo(codigoCuenta: Int, usuario: Usuario){ usuarios[codigoCuenta] = usuario }
 }
+
+class ErrorAlIngresar(mensaje: String): Exception(mensaje)
