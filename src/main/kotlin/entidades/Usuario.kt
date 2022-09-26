@@ -50,7 +50,7 @@ class Usuario (
     
     fun checkDineroACambiar(dinero: Double): Boolean{ 
         if(dinero > dineroEnCuenta || dinero <= 0){
-           throw SaldoInsuficiente("Saldo insuficiente")
+           throw SaldoInsuficiente(dinero)
         } else {
             return true
         } 
@@ -58,4 +58,3 @@ class Usuario (
 }
 
 
-class SaldoInsuficiente(mensaje: String): Exception(mensaje)
