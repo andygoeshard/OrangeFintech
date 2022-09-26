@@ -40,7 +40,7 @@ object UsuarioRepositorio {
     fun iniciar(nickname: String, password: String): Usuario{
         var usuarioIniciado = Usuario()
         for(elemento in usuarios){
-            if(existe(nickname, password)) usuarioIniciado = elemento else throw ErrorAlIngresar("Usuario y/o contraseña incorrectos")
+            if(existe(nickname, password)) usuarioIniciado = elemento else throw ErrorAlIngresar(nickname,password)
         }
         return usuarioIniciado
     }
@@ -65,4 +65,4 @@ object UsuarioRepositorio {
     fun editarPorCodigo(codigoCuenta: Int, usuario: Usuario){ usuarios[codigoCuenta] = usuario }
 }
 
-class ErrorAlIngresar(mensaje: String): Exception(mensaje)
+
