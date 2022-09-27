@@ -1,6 +1,7 @@
 package InteraccionConElUsuario
 import entidades.*
 import repositorios.CompraRepositorio
+import repositorios.ErrorAlIngresar
 import repositorios.UsuarioRepositorio
 import java.time.LocalDate
 import java.time.LocalTime
@@ -198,6 +199,7 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
     println("Usted tiene ${usuario.criptomonedasEnCuenta} Criptomonedas en su cuenta.")
     println("Ingrese un valor para comprar criptomonedas: ")
 
+    var exception = false
     val dineroACambiar = readLine()!!.toDouble()
     val comision = (dineroACambiar.times(Criptomas.calcularComision()))
     val dineroACambiarMasComision = dineroACambiar.plus(comision)
@@ -208,7 +210,9 @@ fun compraCriptomonedasCriptomas(usuario: Usuario){
         usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)
     } catch(e: SaldoInsuficiente){
         println("Error, no se pudo realizar la transaccion.")
-    } finally {
+        exception = true
+    }
+        if(!exception){
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
 
@@ -237,6 +241,7 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
     println("Usted tiene ${usuario.criptomonedasEnCuenta} Criptomonedas en su cuenta.")
     println("Ingrese un valor para comprar criptomonedas: ")
 
+    var exception = false
     val dineroACambiar = readLine()!!.toDouble()
     val comision = (dineroACambiar.times(Criptodia.calcularComision()))
     val dineroACambiarMasComision = dineroACambiar.plus(comision)
@@ -247,7 +252,7 @@ fun compraCriptomonedasCriptodia(usuario: Usuario){
         usuario.checkDineroACambiar(dineroACambiarMasComisionMenosCashback)
     } catch(e: SaldoInsuficiente){
         println("Error, no se pudo realizar la transaccion.")
-    } finally {
+    } if(!exception){
         val VALOR_CRIPTOMONEDA = 1.0
         val VALOR_DINERO = 50.0
 
