@@ -47,6 +47,7 @@ class Usuario (
     }
 
     fun agregarSaldo(saldo: Double): Boolean{ if(saldo <= 0) return false else this.dineroEnCuenta += saldo; return true; }
+
     
     fun checkDineroACambiar(dinero: Double): Boolean{ 
         if(dinero > dineroEnCuenta || dinero <= 0){
@@ -56,6 +57,5 @@ class Usuario (
         } 
     }
 }
-
 
 class SaldoInsuficiente(mensaje: String): Exception(mensaje)

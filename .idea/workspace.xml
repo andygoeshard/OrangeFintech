@@ -7,9 +7,14 @@
     <list default="true" id="7333bada-2cbd-4c21-811c-816b1377ce8c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/InteraccionConElUsuario/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/InteraccionConElUsuario/MainKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Carrecripto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Carrecripto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Criptodia.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Criptodia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Criptomas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Criptomas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Exchange.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Exchange.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/entidades/Usuario.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/UsuarioRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fintech-tp1/repositorios/UsuarioRepositorio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/InteraccionConElUsuario/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/InteraccionConElUsuario/main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/entidades/Usuario.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/entidades/Usuario.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
