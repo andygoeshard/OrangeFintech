@@ -1,7 +1,8 @@
 package entidades
 
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalTime
-import java.util.*
 
 abstract class Exchange{
     abstract fun calcularComision(): Double
@@ -26,11 +27,16 @@ object Criptodia: Exchange(){
 object Carrecripto: Exchange(){
     override fun calcularComision(): Double {
 
-        val diaDeHoy = Calendar.getInstance(); // Obtiene el dia de hoy
-        if(diaDeHoy.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || diaDeHoy.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-            return 0.3}
+        val diaDeHoy = LocalDate.now(); // Obtiene el dia de hoy
+        var comision = when(diaDeHoy.dayOfWeek){
+
+            DayOfWeek.SATURDAY ->  0.03
+            DayOfWeek.SUNDAY -> 0.03
+            else -> 0.0075
+
+        }
         // Si es sabado o domingo retorna 3% de comision
-        else return 0.075
-        // Cualquier otro dia retorna comision de 0.75%
+        // Cualquier otro dia retorna comision de 0.75%-
+        return comision
     }
 }
