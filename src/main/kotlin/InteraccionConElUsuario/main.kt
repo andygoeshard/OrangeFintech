@@ -439,17 +439,12 @@ private fun agregarNuevaCompra(
 }
 
 fun otorgarCashback(usuario: Usuario): Double {
-
     val periodo = Period.between(usuario.fechaAlta, LocalDate.now()).toTotalMonths()
-    val cashback = when (periodo) {
-
+    return when (periodo) {
         in 0..3 -> 0.05
         in 4..12 -> 0.03
         else -> 0.0
-
     }
-    return cashback
-
 }
 
 /* ------------------------------------------------------------------------------------------------- */
