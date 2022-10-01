@@ -1,5 +1,6 @@
 package entidades
 
+import excepciones.SaldoInsuficiente
 import java.time.LocalDate
 
 class Usuario (
@@ -57,5 +58,3 @@ class Usuario (
         } 
     }
 }
-
-class SaldoInsuficiente(mensaje: String): Exception(mensaje)
