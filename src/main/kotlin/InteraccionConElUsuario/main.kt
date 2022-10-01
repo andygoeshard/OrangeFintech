@@ -116,7 +116,7 @@ fun crearUsuario() {
 
     // Asignacion del codigo de usuario. Obtiene el ultimo codigo de usuario de la lista y le suma uno
 
-    val nuevoCodigoUsuario: Int = UsuarioRepositorio.usuarios.last().codigoCuenta + 1
+    val nuevoCodigoUsuario: Int = UsuarioRepositorio.usuarios.last().codigoCuenta.plus(1)
     nuevo.codigoCuenta = nuevoCodigoUsuario
 
     while (iteracion) {
@@ -124,8 +124,12 @@ fun crearUsuario() {
         println("Ingresar nombre de usuario:")
         val nombreDeUsuario = readln()
 
-        println("Recuerde que: ")
-        println("Su contraseña debe llevar al menos: \n 1 mayuscula - 1 minuscula \n 1 numero - 1 caracter especial")
+        println("""
+            Recuerde que: 
+            Su contraseña debe llevar al menos:
+            1 mayuscula - 1 minuscula - 1 número - 1 caracter especial
+        """.trimIndent())
+        println("Ingresar contraseña:")
         println("Ingresar contraseña:")
         val contrasenia = readln()
 
@@ -142,8 +146,11 @@ fun crearUsuario() {
 
         } else {
             println("El usuario ya existe o la contraseña no coincide con la confirmación")
-            println("Recuerde que: ")
-            println("Su contraseña debe llevar al menos: \n 1 mayuscula - 1 minuscula \n 1 numero - 1 caracter especial")
+            println("""
+                Recuerde que: 
+                Su contraseña debe llevar al menos:
+                1 mayuscula - 1 minuscula - 1 número - 1 caracter especial
+            """.trimIndent())
         }
 
     }
