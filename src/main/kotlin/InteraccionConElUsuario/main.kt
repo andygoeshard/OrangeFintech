@@ -1,6 +1,7 @@
 package InteraccionConElUsuario
 
 import entidades.*
+import excepciones.SaldoInsuficiente
 import repositorios.CompraRepositorio
 import repositorios.UsuarioRepositorio
 import java.time.LocalDate
