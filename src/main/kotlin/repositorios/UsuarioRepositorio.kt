@@ -22,23 +22,17 @@ object UsuarioRepositorio {
         else usuarios.add(usuario)
     }
 
-    //No usada pero la dejamos por las dudas
+    /*//No usada pero la dejamos por las dudas
 
     fun eliminar(usuario: Usuario) {
         usuarios.remove(usuario)
-    }
+    }*/
 
     fun existe(nickname: String, password: String): Boolean {
-
-        val existeNombre =
-            (usuarios.any({ usuario: Usuario -> usuario.nickname.equals(nickname) && usuario.password.equals(password) }))
-
-        return existeNombre;
-
+        return (usuarios.any { usuario: Usuario -> usuario.nickname.equals(nickname) && usuario.password.equals(password) });
     }
 
     fun iniciar(nickname: String, password: String): Usuario {
-
         var usuarioIniciado = Usuario()
         for (elemento in usuarios) {
             if (elemento.nickname.equals(nickname) && elemento.password.equals(password)) {
@@ -49,7 +43,6 @@ object UsuarioRepositorio {
     }
 
     fun obtenerPorCodigo(codigoCuenta: Int) {
-
         for (elemento in usuarios) {
             if (elemento.codigoCuenta.equals(codigoCuenta)) {
                 print(
