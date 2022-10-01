@@ -16,11 +16,11 @@ object CompraRepositorio {
         this.compra.add(compra)
     }
 
-    fun eliminar(compra: Compra) {
+    /*fun eliminar(compra: Compra) {
         this.compra.remove(compra)
-    }
+    }*/
 
-    // No se usa.
+    /*// No se usa.
     fun obtenerPorCodigo(codigoCompra: Int) {
         //TODO: Completar
         for (elemento in compra) {
@@ -40,7 +40,8 @@ object CompraRepositorio {
                 )
             }
         }
-    }
+    }*/
+    
     fun obtenerListaCompraPorUsuario(nickname: String){
 
         var obtuvoInformacion = false
@@ -68,10 +69,10 @@ object CompraRepositorio {
     }
 
     private fun stringuearTipoCripto(criptomoneda: Criptomonedas): String {
-        when(criptomoneda){
-            Criptomonedas.CRIPTOMAS -> return "Criptomas"
-            Criptomonedas.CRIPTODIA -> return "Criptodia"
-            Criptomonedas.CARRECRIPTO -> return "Carrecripto"
+        return when(criptomoneda){
+            Criptomonedas.CRIPTOMAS -> "Criptomas"
+            Criptomonedas.CRIPTODIA -> "Criptodia"
+            Criptomonedas.CARRECRIPTO -> "Carrecripto"
         }
     }
 }
