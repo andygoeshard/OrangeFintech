@@ -37,11 +37,9 @@ class Usuario (
             else if(arrayCharContrasenia[i].isLowerCase()) contieneMinuscula = true
             else if(!arrayCharContrasenia[i].isLetterOrDigit()) contieneCaracterEspecial = true
 
-            if(contieneMayuscula == true && contieneMinuscula == true && contieneNumero == true && contieneCaracterEspecial == true) {
-
+            if(contieneMayuscula && contieneMinuscula && contieneNumero && contieneCaracterEspecial) {
                 this.password = contrasenia;
                 return true
-
             }
         }
         return false
