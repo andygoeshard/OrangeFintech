@@ -241,19 +241,24 @@ fun compraCriptomonedasCriptomas(usuario: Usuario) {
 
             val comisionString = "2%"
 
-            var mensaje =
-                "\t\t-COMPRA REALIZADA-\nUsted compro $${valorTotalCriptomonedas} Criptomonedas de Criptomas \n" +
-                        "Se cobro una comision de \$ ${comision} (${comisionString}) \n"
+            var mensaje = """
+                COMPRA REALIZADA
+                Usted compró ${'$'}${valorTotalCriptomonedas} Criptomonedas de Criptomas
+                Se cobró una comisión de ${'$'} ${comision} (${comisionString})
+            """.trimIndent()
 
-            if (cashback != 0.0) mensaje += "Se otorgó un cashback de $cashback \nMuchas gracias por la compra."
-            else mensaje += "Muchas gracias por la compra.\n"
+            mensaje += if (cashback != 0.0) """
+                        Se otorgó un cashback de $cashback
+                        Muchas gracias por la compra.
+                    """.trimIndent()
+            else "Muchas gracias por la compra."
 
             println(mensaje)
 
             // Funcion Agregar nueva compra
             agregarNuevaCompra(
                 usuario.nickname,
-                CompraRepositorio.compra.last().codigoCompra + 1,
+                CompraRepositorio.compra.last().codigoCompra.plus(1),
                 LocalDate.now(),
                 LocalTime.now(),
                 Criptomonedas.CRIPTOMAS,
@@ -284,6 +289,7 @@ fun calcularDineroTotal(dineroACambiar: Double, exchange: Exchange): Double {
 
     return dineroACambiar.plus(comision)
 }
+
 fun compraCriptomonedasCriptodia(usuario: Usuario) {
 
     comprarCriptomonedasPrinty(usuario)
@@ -302,12 +308,18 @@ fun compraCriptomonedasCriptodia(usuario: Usuario) {
 
             // Mensaje para imprimir en consola
 
-            var mensaje =
-                "\t\t-COMPRA REALIZADA-\nUsted compro ${valorTotalCriptomonedas} Criptomonedas de Criptodia \n" +
-                        "Se cobro una comision de \$ ${comision} (${comisionString}) \n"
+            var mensaje = """
+                 COMPRA REALIZADA
+                 Usted compró ${valorTotalCriptomonedas} Criptomonedas de Criptodia
+                 Se cobró una comisión de ${'$'} ${comision} (${comisionString})
+            """.trimIndent()
 
-            if (cashback != 0.0) mensaje += "Se otorgó un cashback de $cashback \nMuchas gracias por la compra."
-            else mensaje += "Muchas gracias por la compra.\n"
+
+            mensaje += if (cashback != 0.0) """
+                        Se otorgó un cashback de $cashback
+                        Muchas gracias por la compra.
+                    """.trimIndent()
+            else "Muchas gracias por la compra."
 
             println(mensaje)
 
@@ -315,7 +327,7 @@ fun compraCriptomonedasCriptodia(usuario: Usuario) {
 
             agregarNuevaCompra(
                 usuario.nickname,
-                CompraRepositorio.compra.last().codigoCompra + 1,
+                CompraRepositorio.compra.last().codigoCompra.plus(1),
                 LocalDate.now(),
                 LocalTime.now(),
                 Criptomonedas.CRIPTODIA,
@@ -353,20 +365,25 @@ fun compraCriptomonedasCarrecripto(usuario: Usuario) {
 
             // Mensaje para imprimir en consola
 
-            var mensaje =
-                "\t\t-COMPRA REALIZADA-\nUsted compro ${valorTotalCriptomonedas} Criptomonedas de Carrecripto \n" +
-                        "Se cobro una comision de \$ ${comision} (${comisionString}) \n"
+            var mensaje = """
+                COMPRA REALIZADA
+                Usted compró ${valorTotalCriptomonedas} Criptomonedas de Carrecripto
+                Se cobró una comisión de ${'$'} ${comision} (${comisionString})
+            """.trimIndent()
 
-            if (cashback != 0.0) mensaje += "Se otorgó un cashback de $cashback \nMuchas gracias por la compra."
-            else mensaje += "Muchas gracias por la compra.\n"
 
+            mensaje += if (cashback != 0.0) """
+                        Se otorgó un cashback de $cashback 
+                        Muchas gracias por la compra.
+                    """.trimIndent()
+            else "Muchas gracias por la compra."
             println(mensaje)
 
             // Funcion Agregar nueva compra
 
             agregarNuevaCompra(
                 usuario.nickname,
-                CompraRepositorio.compra.last().codigoCompra + 1,
+                CompraRepositorio.compra.last().codigoCompra.plus(1),
                 LocalDate.now(),
                 LocalTime.now(),
                 Criptomonedas.CARRECRIPTO,
@@ -489,8 +506,8 @@ fun agregarSaldo(usuario: Usuario) {
             iteracion = false
             val codigoDeLaCuenta: Int = usuario.codigoCuenta
             UsuarioRepositorio.editarPorCodigo(codigoDeLaCuenta, usuario)
-            println("Saldo agregado correctamente.\n")
-        } else println("No ingreso un valor valido.\n")
+            println("Saldo agregado correctamente.")
+        } else println("No ingreso un valor valido.")
 
     }
 
